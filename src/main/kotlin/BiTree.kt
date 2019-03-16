@@ -1,6 +1,6 @@
 import java.util.*
 
-class Node(val value: Int, var left: Node? = null, var right: Node? = null, var parent: Node?) {
+class Node(var value: Int, var left: Node? = null, var right: Node? = null, var parent: Node?) {
     override fun toString() = value.toString()
 }
 
@@ -69,20 +69,65 @@ class SearchTree : BiTree {
         }
     }
 
+    private fun remove(subTree: Node, value: Int): Boolean {
+        val toRemove = search(subTree, value)
+        return if (toRemove == null) {
+            false
+        } else {
+            remove(toRemove)
+            true
+        }
+    }
+
     private fun remove(node: Node) {
         if (node.left == null && node.right == null) {
             val parent = node.parent
             if (parent == null) {
                 root = null
             } else {
-                if(parent.right != null && parent.right!! == node) {
+                if (parent.right != null && parent.right!! == node) {
                     parent.right = null
-                } else if (parent.left != null && parent.left!! == node){
+                } else if (parent.left != null && parent.left!! == node) {
                     parent.left = null
                 }
             }
+            return
         }
-        //TODO
+        if (node.left == null && node.right != null) {
+            val parent = node.parent
+            if (parent == null) {
+                root = node.right
+                return
+            }
+            if (parent.right != null && parent.right!! == node) {
+                parent.right = node.right
+                node.right!!.parent = parent
+            } else if (parent.left != null && parent.left!! == node) {
+                parent.left = node.right
+                node.right!!.parent = parent
+            }
+            return
+        }
+        if (node.right == null && node.left != null) {
+            val parent = node.parent
+            if (parent == null) {
+                root = node.left
+                return
+            }
+            if (parent.right != null && parent.right!! == node) {
+                parent.right = node.left
+                node.left!!.parent = parent
+            } else if (parent.left != null && parent.left!! == node) {
+                parent.left = node.left
+                node.left!!.parent = parent
+            }
+            return
+        }
+        if (node.right != null && node.left != null) {
+            val min = min(node.right!!)
+            node.value = min.value
+            remove(node.right!!, node.value)
+        }
     }
 
     override fun min(): Int? {

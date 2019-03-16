@@ -101,14 +101,7 @@ class BiTreeTest {
     @Test
     fun listLevel() {
         val searchTree = SearchTree()
-        searchTree.insert(32)
-        searchTree.insert(16)
-        searchTree.insert(8)
-        searchTree.insert(64)
-        searchTree.insert(24)
-        searchTree.insert(128)
-        searchTree.insert(4)
-        searchTree.dfsRecursive()
+        prepareGraph(searchTree)
         searchTree.listLevel(0)
         searchTree.listLevel(1)
         searchTree.listLevel(2)
@@ -119,42 +112,21 @@ class BiTreeTest {
     @Test
     fun min() {
         val searchTree = SearchTree()
-        searchTree.insert(32)
-        searchTree.insert(16)
-        searchTree.insert(8)
-        searchTree.insert(64)
-        searchTree.insert(24)
-        searchTree.insert(128)
-        searchTree.insert(4)
-        searchTree.dfsRecursive()
+        prepareGraph(searchTree)
         println(searchTree.min())
     }
 
     @Test
     fun max() {
         val searchTree = SearchTree()
-        searchTree.insert(32)
-        searchTree.insert(16)
-        searchTree.insert(8)
-        searchTree.insert(64)
-        searchTree.insert(24)
-        searchTree.insert(128)
-        searchTree.insert(4)
-        searchTree.dfsRecursive()
+        prepareGraph(searchTree)
         println(searchTree.max())
     }
 
     @Test
     fun search() {
         val searchTree = SearchTree()
-        searchTree.insert(32)
-        searchTree.insert(16)
-        searchTree.insert(8)
-        searchTree.insert(64)
-        searchTree.insert(24)
-        searchTree.insert(128)
-        searchTree.insert(4)
-        searchTree.dfsRecursive()
+        prepareGraph(searchTree)
         println(searchTree.search(32))
         println(searchTree.search(16))
         println(searchTree.search(8))
@@ -163,5 +135,82 @@ class BiTreeTest {
         println(searchTree.search(128))
         println(searchTree.search(4))
         println(searchTree.search(0))
+    }
+
+    @Test
+    fun removeUnexisting() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(0)
+        searchTree.dfsRecursive()
+    }
+
+    @Test
+    fun removeLeave1() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(4)
+        searchTree.dfsRecursive()
+    }
+
+    @Test
+    fun removeLeave2() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(24)
+        searchTree.dfsRecursive()
+    }
+
+    @Test
+    fun removeLeave3() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(128)
+        searchTree.dfsRecursive()
+    }
+
+    @Test
+    fun removeNodeWith1Child1() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(8)
+        searchTree.dfsRecursive()
+    }
+
+    @Test
+    fun removeNodeWith1Child2() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(64)
+        searchTree.dfsRecursive()
+    }
+
+    @Test
+    fun removeNodeWith2Children() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(16)
+        searchTree.dfsRecursive()
+        //TODO
+    }
+
+    @Test
+    fun removeRoot() {
+        val searchTree = SearchTree()
+        prepareGraph(searchTree)
+        searchTree.remove(32)
+        searchTree.dfsRecursive()
+        //TODO
+    }
+
+    private fun prepareGraph(searchTree: SearchTree) {
+        searchTree.insert(32)
+        searchTree.insert(16)
+        searchTree.insert(8)
+        searchTree.insert(64)
+        searchTree.insert(24)
+        searchTree.insert(128)
+        searchTree.insert(4)
+        searchTree.dfsRecursive()
     }
 }
