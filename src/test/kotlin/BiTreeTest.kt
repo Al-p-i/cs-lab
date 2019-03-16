@@ -191,7 +191,6 @@ class BiTreeTest {
         prepareGraph(searchTree)
         searchTree.remove(16)
         searchTree.dfsRecursive()
-        //TODO
     }
 
     @Test
@@ -200,7 +199,6 @@ class BiTreeTest {
         prepareGraph(searchTree)
         searchTree.remove(32)
         searchTree.dfsRecursive()
-        //TODO
     }
 
     private fun prepareGraph(searchTree: SearchTree) {
