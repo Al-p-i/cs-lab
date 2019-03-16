@@ -1,3 +1,5 @@
+package tree
+
 import java.util.*
 
 class Node(var value: Int, var left: Node? = null, var right: Node? = null, var parent: Node?) {
